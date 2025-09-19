@@ -8,19 +8,12 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   <script ript src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <style>
-    body{
-      /* height: 100vh;
-      background: linear-gradient(-55deg,#787575 60%,black 40%); */
-      /* background-image: url("back\ img.png"); */
-    }
-  </style>
 </head>
 
 <body class="bg-gray-900">
 
   <!-- Auth Section -->
-  <section class="hidden flex items-center justify-center h-screen">
+  <section id="authSect" class="flex items-center justify-center h-screen">
 
     <div class="flex flex-row shadow-xl shadow-gray-700 bg-[#1E2939] border border-gray-600 rounded-2xl">
       <!-- Image section -->
@@ -36,37 +29,44 @@
       </div>
 
       <!-- Auth [UI] -->
-      <div class="text-white px-10 py-10 space-y-4">
+      <div class="text-white px-10 py-10 space-y-4.5">
 
         <!-- Text Part -->
         <div>
-          <p class="text-[22px] text-xl font-normal
+          <p class="text-[23px] text-xl font-normal
             bg-gradient-to-r from-[#a6a6a6] to-[#ffffff] bg-clip-text text-transparent">
             Login or Create an account</p>
-          <p class="text-[#8c8c8c] text-[15px]">
+          <p class="text-[#8c8c8c] text-[16px]">
             Use email and password to continue.</p>
         </div>
 
         <!-- Input Part -->
         <div class="flex flex-col gap-1.5 text-sm text-slate-300">
-            <label for="emailInp" class="text-[14px]">Email</label>
+            <label for="emailInp" class="text-[15px]">Email</label>
             <input id="emailInp" type="email" placeholder="you@example.com"
-            class="w-75 px-4 py-2.5 rounded-xl border border-[#515151] bg-gray-900/40"></input>
+            class="w-80 px-4 py-2.5 rounded-xl border border-[#515151] bg-gray-900/40 focus:outline-none"></input>
         </div>
         <div class="flex flex-col gap-1.5 text-slate-300">
-            <label for="passInp" class="text-[14px]">Password</label>
+            <label for="passInp" class="text-[15px]">Password</label>
             <input id="passInp" type="password" placeholder="••••••••"
-            class="w-75 px-4 py-2 rounded-xl border border-[#515151] bg-gray-900/40"></input>
+            class="w-80 px-4 py-2 rounded-xl border border-[#515151] bg-gray-900/40 focus:outline-none"></input>
         </div>
 
         <!-- Button Part -->
-        <div class="mt-4">
-          <button id="signUpBtn" class="border border-slate-600 rounded-xl px-4 py-2 mr-1 text-sm font-medium hover:cursor-pointer hover:text-gray-300
+        <div class="my-4 mb-3.5">
+          <button id="signUpBtn" class="border border-slate-600 rounded-xl px-4.5 py-2.5 mr-1 text-[14px] font-medium hover:cursor-pointer hover:text-gray-300
           bg-gradient-to-r from-[#6a6a6a] via-[#afb2ba] to-[#6a6a6a] bg-clip-text text-transparent">
           Sign Up</button>
-          <button id="logInBtn" class="border border-slate-600 rounded-xl px-4 py-2 text-sm font-medium text-slate-200 hover:cursor-pointer hover:text-gray-300
+          <button id="logInBtn" class="border border-slate-600 rounded-xl px-4.5 py-2.5 text-[14px] font-medium text-slate-200 hover:cursor-pointer hover:text-gray-300
           bg-gradient-to-r from-[#6a6a6a] via-[#afb2ba] to-[#6a6a6a] bg-clip-text text-transparent">
           Log In</button>
+        </div>
+
+        <!-- Forget Password Link -->
+        <div class="ml-5">
+          <button id="forgtPasswBtn" class="text-[15px] font-medium text-slate-200 hover:cursor-pointer hover:underline hover:text-[#aaaaaa]
+            bg-gradient-to-r from-[#727272] via-[#afb2ba] to-[#727272] bg-clip-text text-transparent">
+            Forget Password?</button>
         </div>
         
       </div>
@@ -75,14 +75,14 @@
   </section>
 
   <!-- Chat Section -->
-  <section class="flex items-start justify-center h-screen">
+  <section id="chatSect" class="hidden flex items-start justify-center h-screen">
 
     <div class="flex flex-col h-full justify-between rounded-2xl">
       <!-- header -->
       <div class="text-white flex flex-row justify-between items-end">
         <p class="text-[23px] font-semibold bg-gradient-to-r from-[#8b8b8b] to-[#cbcbcb] bg-clip-text text-transparent">
           Realtime Chat</p>
-        <button id="signUpBtn" class="border border-slate-600 rounded-xl px-4 py-2 mr-1 text-[15px] font-medium hover:cursor-pointer hover:text-gray-300
+        <button id="signOutBtn" class="border border-slate-600 rounded-xl px-4 py-2 mr-1 text-[15px] font-medium hover:cursor-pointer hover:text-gray-300
           bg-gradient-to-r from-[#6a6a6a] via-[#afb2ba] to-[#6a6a6a] bg-clip-text text-transparent">
           Sign Out</button>
       </div>
@@ -97,9 +97,12 @@
           
           <!-- Plus-Icon -->
           <span aria-hidden="true" data-icon="plus-rounded" class="xxk0z11 xvy4d1p">
-            <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class="" fill="none">
-              <path d="M11 13H5.5C4.94772 13 4.5 12.5523 4.5 12C4.5 11.4477 4.94772 11 5.5 11H11V5.5C11 4.94772 11.4477 4.5 12 4.5C12.5523 4.5 13 4.94772 13 5.5V11H18.5C19.0523 11 19.5 11.4477 19.5 12C19.5 12.5523 19.0523 13 18.5 13H13V18.5C13 19.0523 12.5523 19.5 12 19.5C11.4477 19.5 11 19.0523 11 18.5V13Z" fill="currentColor"></path>
-            </svg>
+            <label for="">
+              <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class="" fill="none">
+                <path d="M11 13H5.5C4.94772 13 4.5 12.5523 4.5 12C4.5 11.4477 4.94772 11 5.5 11H11V5.5C11 4.94772 11.4477 4.5 12 4.5C12.5523 4.5 13 4.94772 13 5.5V11H18.5C19.0523 11 19.5 11.4477 19.5 12C19.5 12.5523 19.0523 13 18.5 13H13V18.5C13 19.0523 12.5523 19.5 12 19.5C11.4477 19.5 11 19.0523 11 18.5V13Z" fill="currentColor"></path>
+              </svg>
+              <input type="file" multiple class="hidden">
+            </label>
           </span>
 
           <!-- Sticker-Icon -->
@@ -128,47 +131,24 @@
 
   </section>
 
+  <!-- New Password Reset Section -->
+  <section class="hidden flex flex-col items-center">
+    <div id="updtPasswSect" class="flex flex-col items-center text-white space-y-4">
+
+      <h2 class="text-xl font-semibold bg-gradient-to-r from-[#6a6a6a] via-[#afb2ba] to-[#6a6a6a] bg-clip-text text-transparent">
+      Set New Password</h2>
+      <input id="newPassInp" type="password" placeholder="••••••••"
+      class="w-80 px-4 py-2 rounded-xl border border-slate-600 focus:outline-none"></input>
+      <button id="updtNewPassBtn" class="border border-slate-600 rounded-xl px-4.5 py-2.5 text-[14px] font-medium text-slate-200 hover:cursor-pointer hover:text-gray-300
+      bg-gradient-to-r from-[#6a6a6a] via-[#afb2ba] to-[#6a6a6a] bg-clip-text text-transparent">
+      Update Password</button>
+
+    </div>
+  </section>
+
 </body>
 
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<!-- <script src="app.js"></script> -->
+<script src="app.js"></script>
 
 </html>
-
-<!-- <section class="w-full h-full flex flex-row justify-between">
-
-  Left Section
-  <section class="ml-15 mt-15">
-    <div class="">
-      <img src="Screenshot 2025-09-17 093726.png" class="w-75 h-60">
-      <p class="text-gray-300 text-2xl font-semibold tracking-wider text-center">Chat-App</p>
-    </div>
-  </section>
-  
-  Right Section
-  <section class="flex flex-col justify-center mr-50">
-    <div class="bg-[#1E2939] border border-white text-white rounded-xl p-5">
-  
-      <div class="">
-        <p>Welcome to Chat</p>
-      </div>
-      <div class="">
-        <p>Sign In</p>
-      </div>
-      <div class="flex flex-col">
-        <label for="">Email</label>
-        <input type="email" name="" id="">
-      </div>
-      <div class="flex flex-col">
-        <label for="">Password</label>
-        <input type="password" name="" id="">
-      </div>
-      <div class="">
-        <button>Sign In</button>
-      </div>
-
-    </div>
-  
-  </section>
-
-</section> -->
